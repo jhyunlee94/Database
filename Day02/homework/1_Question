@@ -1,0 +1,76 @@
+1) 송강 교수가 강의하는 과목을 검색한다
+SELECT P.PNAME, P.PNO, C.CNAME
+    FROM PROFESSOR P
+    INNER JOIN COURSE C
+    ON P.PNO = C.PNO
+    WHERE PNAME = '송강';
+
+SELECT p.pname, c.cname
+    FROM professor p, course c
+    WHERE p.pno = c.pno 
+      AND p.pname = '송강';
+
+2) 화학 관련 과목을 강의하는 교수의 명단을 검색한다
+SELECT PNAME
+    FROM PROFESSOR
+    WHERE SECTION = '화학';
+
+3) 학점이 2학점인 과목과 이를 강의하는 교수를 검색한다
+
+SELECT P.PNAME, C.CNAME,C.ST_NUM
+    FROM PROFESSOR P, 
+         COURSE C
+    WHERE C.ST_NUM = 2;
+    
+
+4) 화학과 교수가 강의하는 과목을 검색한다
+SELECT P.PNAME, C.CNAME 
+    FROM PROFESSOR P, COURSE C
+    WHERE P.SECTION = '화학';
+
+5) 화학과 1학년 학생의 기말고사 성적을 검색한다
+SELECT S1.SNO, S1.SNAME, S2.RESULT
+    FROM STUDENT S1, 
+         SCORE S2
+    WHERE S1.SNO = S2.SNO
+      AND S1.SYEAR = 1
+      AND S1.MAJOR = '화학';
+
+6) 일반화학 과목의 기말고사 점수를 검색한다
+SELECT C.CNAME, S.RESULT
+    FROM COURSE C, 
+         SCORE S
+    WHERE C.CNO = S.CNO
+      AND C.CNAME = '일반화학';
+
+7) 화학과 1학년 학생의 일반화학 기말고사 점수를 검색한다
+SELECT S.SNAME, S.SYEAR, C.CNAME, SC.RESULT
+    FROM STUDENT S,
+         COURSE C,
+         SCORE SC
+    WHERE S.MAJOR = '화학'
+      AND S.SYEAR = 1
+      AND C.CNAME = '일반화학'
+      AND S.SNO = SC.SNO;
+
+8) 화학과 1학년 학생이 수강하는 과목을 검색한다
+SELECT S.SNAME, S.MAJOR, S.SYEAR, C.CNAME
+    FROM STUDENT S,
+         SCORE SC,
+         COURSE C
+    WHERE S.SYEAR = 1
+    AND S.MAJOR LIKE '%화학%'
+    AND S.SNO = SC.SNO 
+    AND SC.CNO = C.CNO;
+
+9) 유기화학 과목의 평가점수가 F인 학생의 명단을 검색한다
+SELECT S.SNAME, SG.GRADE, C.CNAME
+    FROM STUDENT S,
+         SCGRADE SG,
+         SCORE SC,
+         COURSE C
+    WHERE S.SNO = SC.SNO
+    AND SC.CNO = C.CNO
+    AND C.CNAME = '유기화학'
+    AND SG.GRADE LIKE 'F';
+
