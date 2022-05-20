@@ -1,0 +1,41 @@
+1) 화학과 학생을 검색하라
+select SNAME, MAJOR FROM STUDENT
+    WHERE MAJOR = '화학';
+
+2) 평점이 2.0 미만인 학생을 검색하라
+select * from student
+    where AVR < 2.0;
+
+3) 관우 학생의 평점을 검색하라
+select * from student
+    where SNAME = '관우';
+
+4) 정교수 명단을 검색하라
+select PNAME, ORDERS FROM PROFESSOR
+    WHERE ORDERS = '정교수';
+
+5) 화학과 소속 교수의 명단을 검색하라
+SELECT  PNAME,
+        SECTION 
+    FROM PROFESSOR
+    WHERE SECTION = '화학';
+
+6) 송강 교수의 정보를 검색하라
+SELECT * 
+    FROM PROFESSOR
+    WHERE PNAME = '송강';
+
+7) 학년별로 화학과 학생의 성적을 검색하라
+SELECT * 
+    FROM STUDENT
+    WHERE MAJOR = '화학';
+
+8) 2000년 이전에 부임한 교수의 정보를 부임일순으로 검색하라
+SELECT *
+    FROM PROFESSOR
+    WHERE HIREDATE <= '1999/12/31:23:59:59'
+    ORDER BY HIREDATE ASC;
+9) 담당 교수가 없는 과목의 정보를 검색하라
+select * from course
+    where PNO IS NULL;
+
