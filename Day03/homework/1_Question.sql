@@ -3,9 +3,15 @@
 SELECT * FROM STUDENT
     WHERE SNAME LIKE '__';
 
+SELECT * FROM STUDENT 
+    WHERE LENGTH(SNAME) = 2;
+
 2) '공'씨 성을 가진 학생의 이름을 검색하세요
 SELECT * FROM STUDENT
     WHERE SNAME LIKE '공%';
+
+SELECT * FROM STUDENT  
+    WHERE SUBSTR(sname, 1, 1) = '공';
 
 3) 교수의 지위를 한글자로 검색하세요(ex. 조교수 -> 조)
 SELECT SUBSTR(ORDERS,1,1) FROM PROFESSOR;
