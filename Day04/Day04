@@ -198,3 +198,37 @@
         ......,
         CONSTRAINT 제약조건 CHECK (조건 - EX) 컬럼1 IN ('남', '여'))
     );
+
+12. 제약조건 관리
+ - 테이블 생성 시에 제약조건을 명시하지 않았을 때 제약조건을 주가하거나
+    필요없는 제약조건을 삭제, 잘못 명시된 제약조건을 수정할 수 있다.
+ - 제약조건의 추가
+    ALTER TABLE 테이블 명 
+        ADD CONSTRAINT 제약조건 제약조건타입;
+    제약조건타입은 테이블 생성 시 제약조건 추가 방식과 동일
+    NOT NULL을 제외한 제약조건만 추가
+ - NOT NULL 제약조건 추가
+    ALTER TABLE 테이블 명
+        MODIFY 컬럼 명 CONSTRAINT 제약조건 NOT NULL;
+ - 제약조건의 삭제
+    ALTER TABLE 테이블 명
+        DROP PRIMARY KEY(컬럼명) | UNIQUE(컬럼명) | CONSTRAINT 제약조건
+        (CASCADE);
+    PK나 UK를 삭제할 때 다른 테이블에 FK 잡혀있으면 삭제 불가능
+    CASCADE : PK나 UK를 삭제할 때 FK 동시에 삭제
+
+13. 컬럼 추가 및 수정
+ - 이미 만들어진 테이블에 새로운 컬럼을 추가하거나 컬럼의 데이터타입을 변경할 때 사용
+ -  ALTER TABLE 테이블 명
+    ADD | MODIFY 컬렴명 데이터타입;
+ -  이미 있는 데이터들에 추가된 컬럼의 값은 null값으로 초기화
+
+14. 컬럼 삭제
+ -  불필요한 컬럼을 삭제할 때 사용
+ -  ALTER TABLE 테이블 명
+    DROP COLUMN 컬럼명;
+15. 컬렴명 수정
+ -  ALTER TABLE 테이블 명
+    RENAME COLUMN 컬럼명 TO 새로운 컬럼명;
+ -  이미 완성된 프로그램에서 컬럼명을 수정할 경우
+    프로그램에서 컬럼명이 포함된 소스코드를 모두 수정해야됨
