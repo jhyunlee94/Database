@@ -6,3 +6,29 @@ FROM  (SELECT DATETIME
         ORDER BY DATETIME DESC
       ) A
 WHERE ROWNUM <= 1;
+
+-- 최솟값 구하기
+
+SELECT A.DATETIME AS "시간"
+FROM (SELECT DATETIME 
+        FROM ANIMAL_INS
+        ORDER BY DATETIME ASC
+     ) A
+WHERE ROWNUM <= 1;
+
+-- 동물 수 구하기
+COUNT(컬럼명) : COUNT 해줌
+
+SELECT COUNT(*) AS count
+    FROM ANIMAL_INS;
+
+-- 중복 제거하기
+
+DISTINCT : 중복제거
+컬럼명 IS NULL : NULL만
+컬럼명 IS NOT NULL : NULL 이 아닌것만
+
+SELECT COUNT(DISTINCT NAME) AS "count"
+    FROM ANIMAL_INS
+    WHERE NAME IS NOT NULL;
+    
