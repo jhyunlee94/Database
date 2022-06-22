@@ -1,1 +1,48 @@
 -- 없어진 기록 찾기
+문제 : 입양을 간 기록은 있는데, 보호소에 들어온 기록이 없는 동물의 ID와 이름을 ID 순으로 조회하는 SQL문을 작성해주세요.
+      
+SELECT A.ANIMAL_ID, A.NAME
+    FROM ANIMAL_OUTS A
+    LEFT JOIN ANIMAL_INS B
+    ON A.ANIMAL_ID = B.ANIMAL_ID
+    WHERE B.DATETIME IS NULL
+    ORDER BY A.ANIMAL_ID ASC;
+    
+-- 있었는데요 없었습니다
+문제 : 보호 시작일(ANIMAL_INS)보다 입양일(ANIMAL_OUTS)이 더 빠른 동물의 아이디와 이름을 조회하는 SQL문을 작성해주세요. 
+      이때 결과는 보호 시작일(ANIMAL_INS.DATETIME)이 빠른 순으로 조회해야합니다.
+
+SELECT A.ANIMAL_ID, A.NAME
+    FROM ANIMAL_OUTS A
+    LEFT JOIN ANIMAL_INS B ON A.ANIMAL_ID = B.ANIMAL_ID
+    WHERE A.DATETIME < B.DATETIME
+    ORDER BY B.DATETIME ASC;
+    
+-- 오랜 기간 보호한 동물(1)
+문제 : 아직 입양(ANIMAL_OUTS)을 못 간 동물 중, 가장 오래 보호소에 있었던 동물 3마리(ROWNUM)의 이름과 보호 시작일을 조회하는 SQL문을 작성해주세요. 
+      이때 결과는 보호 시작일 순(ANIMAL_INS)으로 조회해야 합니다.
+
+
+SELECT A.NAME, A.DATETIME
+FROM (
+    SELECT A.NAME, A.DATETIME
+        FROM ANIMAL_INS A
+        LEFT JOIN ANIMAL_OUTS B /*입양을 못간 동물 중, 보호소에 있었던 동물이니까 ANIMAL_INS에 LEFT JOIN*/
+        ON A.ANIMAL_ID = B.ANIMAL_ID 
+        WHERE B.DATETIME IS NULL /*입양을 못간*/
+        ORDER BY A.DATETIME ASC
+    ) A
+WHERE ROWNUM <= 3;
+
+-- 보호소에서 중성화한 동물
+
+문제 : 보호소에서 중성화 수술을 거친 동물 정보를 알아보려 합니다. 
+      보호소에 들어올 당시에는 중성화1되지 않았지만, 
+      보호소를 나갈 당시에는 중성화된 동물의 아이디와 생물 종, 이름을 조회하는 아이디 순으로 조회하는 SQL 문을 작성해주세요.
+
+SELECT A.ANIMAL_ID, A.ANIMAL_TYPE, A.NAME
+    FROM ANIMAL_OUTS A
+    LEFT JOIN ANIMAL_INS B
+    ON A.ANIMAL_ID = B.ANIMAL_ID
+    WHERE A.SEX_UPON_OUTCOME != B.SEX_UPON_INTAKE
+    ORDER BY ANIMAL_ID ASC;
