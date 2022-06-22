@@ -1,0 +1,20 @@
+-- 이름이 없는 동물의 아이디
+SELECT ANIMAL_ID
+    FROM ANIMAL_INS
+    WHERE NAME IS NULL
+    ORDER BY ANIMAL_ID ASC;
+    
+-- 이름이 있는 동물의 아이디
+SELECT ANIMAL_ID
+    FROM ANIMAL_INS
+    WHERE NAME IS NOT NULL
+    ORDER BY ANIMAL_ID ASC;
+    
+-- NULL 처리하기
+
+NVL(컬럼명, 문구) : NULL인 데이터 문구로 변경
+                 NVL 함수는 값이 NULL인 경우 지정값을 출력하고, NULL이 아니면 원래 값을 그대로 출력
+
+SELECT ANIMAL_TYPE, NVL(NAME,'No name'), SEX_UPON_INTAKE
+    FROM ANIMAL_INS
+    ORDER BY ANIMAL_ID ASC;
